@@ -8,15 +8,15 @@ export default function GamesScreen() {
     const [showCreateGame, setShowCreateGame] = useState(false);
 
     return (
-        <View className="flex-1 bg-[#1a237e]">
+        <View className="flex-1 bg-lightBackground">
             <SafeAreaView className="flex-1 justify-center items-center px-5">
-                <View className="bg-white/10 p-6 rounded-2xl w-full max-w-md items-center">
+                <View className="bg-darkBackground p-6 rounded-2xl w-full max-w-md items-center">
                     <Text className="text-4xl font-bold text-white mb-2">Hide & Seek</Text>
 
                     {!showCreateGame ? (
                         <View className="w-full mt-6 space-y-4">
                             <TouchableOpacity
-                                className="flex-row items-center justify-center gap-2 bg-purple-600 p-4 rounded-xl"
+                                className="flex-row items-center justify-center gap-2 bg-primaryColor p-4 rounded-xl"
                                 onPress={() => setShowCreateGame(true)}
                             >
                                 <Ionicons name="add-circle" size={24} color="#ffffff" />
@@ -24,7 +24,7 @@ export default function GamesScreen() {
                             </TouchableOpacity>
 
                             <TouchableOpacity
-                                className="flex-row items-center justify-center gap-2 bg-indigo-900 p-4 rounded-xl mt-4"
+                                className="flex-row items-center justify-center gap-2 bg-secondaryColor p-4 rounded-xl mt-4"
                                 onPress={() => router.push('/join-game')}
                             >
                                 <Ionicons name="enter" size={24} color="#ffffff" />
@@ -34,7 +34,7 @@ export default function GamesScreen() {
                     ) : (
                         <View className="w-full mt-6 space-y-4">
                             <TouchableOpacity
-                                className="bg-purple-600 p-4 rounded-xl justify-center items-center"
+                                className="bg-secondaryColor p-4 rounded-xl justify-center items-center"
                                 onPress={() => {
                                     router.push('/hostGame');
                                     setShowCreateGame(false);
