@@ -26,6 +26,7 @@ export default function HostGame() {
                 .from('games')
                 .insert([{ code: newCode, host_id: user.id, status: 'waiting' }])
                 .select('id')
+
                 .single();
 
             if (error) {

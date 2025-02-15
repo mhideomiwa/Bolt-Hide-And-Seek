@@ -8,7 +8,7 @@ export default function AppLayout() {
         <GamesProvider>
             <Tabs
                 screenOptions={{
-                    headerShown: true,
+                    headerShown: false,
                     tabBarStyle: {
                         backgroundColor: '#1a237e',
                         borderTopColor: '#311b92',

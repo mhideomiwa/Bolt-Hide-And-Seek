@@ -1,39 +1,42 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useAuth } from '../../context/auth';
+import {SafeAreaView} from "react-native-safe-area-context";
 
 export default function ProfileScreen() {
   const { user, signOut } = useAuth();
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Profile</Text>
-      </View>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Profile</Text>
+          </View>
 
-      <View style={styles.content}>
-        <View style={styles.stats}>
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>12</Text>
-            <Text style={styles.statLabel}>Games Played</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>8</Text>
-            <Text style={styles.statLabel}>Games Won</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>45m</Text>
-            <Text style={styles.statLabel}>Best Time</Text>
+          <View style={styles.content}>
+            <View style={styles.stats}>
+              <View style={styles.statItem}>
+                <Text style={styles.statValue}>12</Text>
+                <Text style={styles.statLabel}>Games Played</Text>
+              </View>
+              <View style={styles.statItem}>
+                <Text style={styles.statValue}>8</Text>
+                <Text style={styles.statLabel}>Games Won</Text>
+              </View>
+              <View style={styles.statItem}>
+                <Text style={styles.statValue}>45m</Text>
+                <Text style={styles.statLabel}>Best Time</Text>
+              </View>
+            </View>
+
+            <TouchableOpacity
+                style={styles.signOutButton}
+                onPress={signOut}
+            >
+              <Text style={styles.signOutText}>Sign Out</Text>
+            </TouchableOpacity>
           </View>
         </View>
-
-        <TouchableOpacity
-          style={styles.signOutButton}
-          onPress={signOut}
-        >
-          <Text style={styles.signOutText}>Sign Out</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+      </SafeAreaView>
   );
 }
 

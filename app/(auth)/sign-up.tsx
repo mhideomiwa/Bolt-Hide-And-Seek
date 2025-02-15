@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useAuth } from '../../context/auth';
 import { LinearGradient } from 'expo-linear-gradient';
-import {router} from "expo-router";
+import { router } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function SignUp() {
     const [email, setEmail] = useState('');
@@ -39,105 +40,60 @@ export default function SignUp() {
         }
     };
 
-
     return (
-        <LinearGradient
-            colors={['#1a237e', '#311b92']}
-            style={styles.container}
-        >
-            <View style={styles.form}>
-                <Text style={styles.title}>Hide & Seek</Text>
-                <Text style={styles.subtitle}>Join the Ultimate Real-World Game</Text>
+        <View className="flex-1 bg-[#1a237e]">
+            <LinearGradient colors={['#1a237e', '#311b92']} style={{ flex: 1 }}>
+                <SafeAreaView className="flex-1 justify-center px-5">
+                    <View className="bg-white/10 p-5 rounded-2xl items-center">
+                        <Text className="text-4xl font-bold text-white mb-2">Hide & Seek</Text>
+                        <Text className="text-lg text-gray-300 mb-8">Join the Ultimate Real-World Game</Text>
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Email"
-                    placeholderTextColor="#9e9e9e"
-                    value={email}
-                    onChangeText={setEmail}
-                    autoCapitalize="none"
-                    editable={!loading}
-                />
+                        <TextInput
+                            className="w-full h-12 bg-white/10 rounded-lg mb-4 px-4 text-white"
+                            placeholder="Email"
+                            placeholderTextColor="#9e9e9e"
+                            value={email}
+                            onChangeText={setEmail}
+                            autoCapitalize="none"
+                            editable={!loading}
+                        />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Password"
-                    placeholderTextColor="#9e9e9e"
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                    editable={!loading}
-                />
+                        <TextInput
+                            className="w-full h-12 bg-white/10 rounded-lg mb-4 px-4 text-white"
+                            placeholder="Password"
+                            placeholderTextColor="#9e9e9e"
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry
+                            editable={!loading}
+                        />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder="Confirm Password"
-                    placeholderTextColor="#9e9e9e"
-                    value={confirmPassword}
-                    onChangeText={setConfirmPassword}
-                    secureTextEntry
-                    editable={!loading}
-                />
+                        <TextInput
+                            className="w-full h-12 bg-white/10 rounded-lg mb-4 px-4 text-white"
+                            placeholder="Confirm Password"
+                            placeholderTextColor="#9e9e9e"
+                            value={confirmPassword}
+                            onChangeText={setConfirmPassword}
+                            secureTextEntry
+                            editable={!loading}
+                        />
 
-                <TouchableOpacity
-                    style={[styles.button, loading && styles.buttonDisabled]}
-                    onPress={handleSignUp}
-                    disabled={loading}
-                >
-                    <Text style={styles.buttonText}>{loading ? 'Signing Up...' : 'Sign Up'}</Text>
-                </TouchableOpacity>
-            </View>
-        </LinearGradient>
+                        <TouchableOpacity
+                            className={`w-full h-12 bg-purple-600 rounded-lg justify-center items-center mt-4 ${loading ? 'opacity-70' : ''}`}
+                            onPress={handleSignUp}
+                            disabled={loading}
+                        >
+                            <Text className="text-white text-lg font-bold">{loading ? 'Signing Up...' : 'Sign Up'}</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity className="mt-4" onPress={() => router.push('/sign-in')}>
+                            <Text className="text-white text-base">
+                                Already have an account? <Text className="text-purple-400 font-bold">Sign in</Text>
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </SafeAreaView>
+            </LinearGradient>
+        </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 20,
-    },
-    form: {
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        padding: 20,
-        borderRadius: 15,
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: 32,
-        fontWeight: 'bold',
-        color: '#ffffff',
-        marginBottom: 8,
-    },
-    subtitle: {
-        fontSize: 16,
-        color: '#e0e0e0',
-        marginBottom: 32,
-    },
-    input: {
-        width: '100%',
-        height: 50,
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        borderRadius: 10,
-        marginBottom: 16,
-        paddingHorizontal: 16,
-        color: '#ffffff',
-    },
-    button: {
-        width: '100%',
-        height: 50,
-        backgroundColor: '#7c4dff',
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 16,
-    },
-    buttonDisabled: {
-        opacity: 0.7,
-    },
-    buttonText: {
-        color: '#ffffff',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-});
