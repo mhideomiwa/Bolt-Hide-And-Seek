@@ -32,25 +32,46 @@ export default function ProfileScreen() {
     }
   };
 
+
   const handleDelete = async () => {
+    try {
+      const API_URL = process.env.EXPO_PUBLIC_API_URL;
+      // const API_URL = 'http://10.37.20.109:3000/api';
 
-    const { error } = await supabase
-        .from('profiles')
-        .delete()
-        .eq('id', user?.id);
+      if (!user?.id) {
+        console.error("User ID is missing");
+        return;
+      }
 
-    if (error) {
-      console.error('Error deleting profile:', error.message);
-      return;
+      console.log('Deleting Profile for user:', user.id);
+      console.log('API_URL:', API_URL);
+
+      const response = await fetch(`${API_URL}/delete-user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: user.id }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to delete user: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log('Delete Response:', data);
+
+      if (data.error) {
+        console.error('Error deleting user:', data.error);
+      } else {
+        console.log('User deleted successfully');
+        signOut();
+      }
+    } catch (error) {
+      console.error('Error in handleDelete:', error);
     }
+  };
 
-    // Delete the user
-    const { error: userError } = await supabase.auth.admin.deleteUser(
-        user?.id
-    );
-
-    await signOut();
-  }
 
   if (loading) {
     return (
